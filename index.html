@@ -39,11 +39,12 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 .dots{display:flex;justify-content:center;gap:8px;margin-top:10px}
 .dots button{width:9px;height:9px;padding:0;border-radius:50%;border:0;background:#c9c9c9;cursor:pointer;transition:all .2s}
 .dots button.on{width:22px;border-radius:5px;background:#2a9d8f}
+.notice{background:#fbbf24;color:#101938;border-radius:14px;padding:10px 14px;font-weight:600;margin:0 auto 16px;max-width:460px;position:relative;z-index:1}
 </style>
 </head>
 <body>
 <div class="w">
-<header id="top"><canvas id="c3d" aria-hidden="true"></canvas>
+<header id="top"><canvas id="c3d" aria-hidden="true"></canvas><!--c:notice--><!--/c:notice-->
 <svg viewBox="0 0 360 190" width="270" height="142" role="img" aria-label="لوگو فیزیوتراپی التیام" style="max-width:80%;height:auto;filter:drop-shadow(0 10px 14px rgba(20,46,156,.28))"><rect x="112" y="12" width="136" height="32" rx="16" fill="var(--brand)"/>
 <text x="180" y="35" text-anchor="middle" direction="rtl" font-family="Vazirmatn,Tahoma,sans-serif" font-size="18" font-weight="600" fill="var(--onbrand)">فیزیوتراپی</text>
 <text x="180" y="112" text-anchor="middle" direction="rtl" font-family="Vazirmatn,Tahoma,sans-serif" font-size="78" font-weight="800" fill="var(--brand)">التیام</text>
@@ -52,14 +53,14 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 <h1 class="sr">فیزیوتراپی التیام</h1>
 <p>کلینیک تخصصی فیزیوتراپی در بابل<br>«نام ما، رسالت ماست. التیامِ دردهای شما، هدفِ هر روزِ ماست.»</p>
 <div class="hl"><a href="#gallery"><b>🏢</b>کلینیک ما</a><a href="#process"><b>🩺</b>روند درمان</a><a href="#faq"><b>💬</b>سؤالات شما</a><a href="#tips"><b>🏋️</b>تمرین روزانه</a></div>
-<div class="perks"><span class="perk">✓ ارزیابی اولیه رایگان</span><span class="perk">✓ طرف قرارداد با همهٔ بیمه‌ها</span><span class="perk">✓ مجهز به جدیدترین دستگاه‌ها</span></div>
+<div class="perks"><!--c:perks--><span class="perk">✓ ارزیابی اولیه رایگان</span><span class="perk">✓ طرف قرارداد با همهٔ بیمه‌ها</span><span class="perk">✓ مجهز به جدیدترین دستگاه‌ها</span><!--/c:perks--></div>
 <a class="btn" href="#book">دریافت نوبت</a><button class="btn alt" id="inst" hidden type="button">نصب اپ روی گوشی</button><p id="ios" class="note" hidden style="text-align:center">برای نصب: دکمه اشتراک‌گذاری مرورگر را بزنید و «Add to Home Screen» را انتخاب کنید.</p>
 <a class="btn alt" href="#services">خدمات ما</a>
 </header>
 
 <section id="services">
 <h2>خدمات</h2>
-<div class="grid">
+<div class="grid"><!--c:services-->
 <div class="card">کمردرد</div>
 <div class="card">گردن‌درد</div>
 <div class="card">توان‌بخشی بعد از جراحی</div>
@@ -68,7 +69,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 <div class="card">لیزر پرقدرت</div>
 <div class="card">درای نیدلینگ</div>
 <div class="card">فیزیوتراپی در منزل</div>
-</div>
+<!--/c:services--></div>
 </section>
 
 <section id="process">
@@ -83,34 +84,34 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 
 <section id="team">
 <h2>درمانگران ما</h2>
-<div class="team"><img src="img/p1.webp" alt="خانم غلام‌پور، کارشناس ارشد فیزیوتراپی" loading="lazy"><div><b>خانم غلام‌پور</b><span>کارشناس ارشد فیزیوتراپی</span><p>همراه شما از ارزیابی اولیه تا پایان دورهٔ درمان.</p></div></div>
+<!--c:team--><div class="team"><img src="img/p1.webp" alt="خانم غلام‌پور، کارشناس ارشد فیزیوتراپی" loading="lazy"><div><b>خانم غلام‌پور</b><span>کارشناس ارشد فیزیوتراپی</span><p>همراه شما از ارزیابی اولیه تا پایان دورهٔ درمان.</p></div></div>
 <div class="team" style="margin-top:12px"><img src="img/p2.webp" alt="خانم امیدوار، فیزیوتراپیست" loading="lazy"><div><b>خانم امیدوار</b><span>فیزیوتراپیست</span><p>با برنامهٔ درمانی متناسب با شرایط هر بیمار.</p></div></div>
-</section>
+<!--/c:team--></section>
 
-<section id="gallery"><h2>کلینیک ما</h2><div class="slider"><div class="track" dir="ltr"><figure><img decoding="async" src="img/p3.webp" alt="پذیرش و سالن ورزش درمانی"><figcaption>پذیرش و سالن ورزش درمانی</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p4.webp" alt="اتاق درمان"><figcaption>اتاق درمان</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p5.webp" alt="اتاق ویزیت"><figcaption>اتاق ویزیت</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p6.webp" alt="شاک‌ویو درمانی در کلینیک التیام"><figcaption>شاک‌ویو درمانی در کلینیک التیام</figcaption></figure></div><button class="nav prev" type="button" aria-label="قبلی">‹</button><button class="nav next" type="button" aria-label="بعدی">›</button><div class="dots" dir="ltr"><button type="button" aria-label="عکس 1"></button><button type="button" aria-label="عکس 2"></button><button type="button" aria-label="عکس 3"></button><button type="button" aria-label="عکس 4"></button></div></div></section>
+<section id="gallery"><h2>کلینیک ما</h2><div class="slider"><div class="track" dir="ltr"><!--c:gallery--><figure><img decoding="async" src="img/p3.webp" alt="پذیرش و سالن ورزش درمانی"><figcaption>پذیرش و سالن ورزش درمانی</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p4.webp" alt="اتاق درمان"><figcaption>اتاق درمان</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p5.webp" alt="اتاق ویزیت"><figcaption>اتاق ویزیت</figcaption></figure><figure><img decoding="async" loading="lazy" src="img/p6.webp" alt="شاک‌ویو درمانی در کلینیک التیام"><figcaption>شاک‌ویو درمانی در کلینیک التیام</figcaption></figure><!--/c:gallery--></div><button class="nav prev" type="button" aria-label="قبلی">‹</button><button class="nav next" type="button" aria-label="بعدی">›</button><div class="dots" dir="ltr"><!--c:dots--><button type="button" aria-label="عکس 1"></button><button type="button" aria-label="عکس 2"></button><button type="button" aria-label="عکس 3"></button><button type="button" aria-label="عکس 4"></button><!--/c:dots--></div></div></section>
 
 <section id="hours">
 <h2>ساعت کاری</h2>
 <div class="box">
-<div class="row"><span>روزهای زوج</span><span>۱۵:۰۰ تا ۲۱:۰۰</span></div>
+<!--c:hours--><div class="row"><span>روزهای زوج</span><span>۱۵:۰۰ تا ۲۱:۰۰</span></div>
 <div class="row"><span>روزهای فرد</span><span>۱۶:۰۰ تا ۲۱:۰۰</span></div>
 <div class="row"><span>پنجشنبه و جمعه</span><span>تعطیل</span></div>
-</div>
+<!--/c:hours--></div>
 </section>
 
 <section id="book">
 <h2>دریافت نوبت</h2>
-<div class="box"><label>نام و نام‌خانوادگی<input id="fn" autocomplete="name"></label><label>شماره موبایل<input id="fp" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxxx"></label><label>مشکل یا خدمت مورد نیاز<select id="fs"><option>کمردرد</option><option>گردن‌درد</option><option>توان‌بخشی بعد از جراحی</option><option>ورزش درمانی</option><option>شاک‌ویو</option><option>لیزر پرقدرت</option><option>درای نیدلینگ</option><option>فیزیوتراپی در منزل</option><option>سایر / نمی‌دانم</option></select></label><label>روز مراجعه<select id="fd"></select></label><label>ساعت<select id="ft"></select></label><button class="btn" id="fsend" type="button">ارسال درخواست نوبت</button><button class="btn alt" id="fcopy" type="button">کپی متن درخواست</button><pre id="fout" class="note" hidden></pre><p class="note">ارزیابی اولیه رایگان است و کلینیک با همهٔ بیمه‌ها قرارداد دارد.</p><p class="note">درخواست شما به‌صورت پیامک برای کلینیک ارسال می‌شود و پس از تأیید کلینیک، نوبت قطعی می‌شود.</p></div><a class="btn" href="tel:09966567674">تماس: ۰۹۹۶۶۵۶۷۶۷۴</a><a class="btn alt" href="https://wa.me/989966567674" target="_blank" rel="noopener">پیام در واتس‌اپ</a><a class="btn alt" href="https://instagram.com/eltiam_phisiotherapy">اینستاگرام کلینیک</a>
+<div class="box"><label>نام و نام‌خانوادگی<input id="fn" autocomplete="name"></label><label>شماره موبایل<input id="fp" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxxx"></label><label>مشکل یا خدمت مورد نیاز<select id="fs"><!--c:svcopts--><option>کمردرد</option><option>گردن‌درد</option><option>توان‌بخشی بعد از جراحی</option><option>ورزش درمانی</option><option>شاک‌ویو</option><option>لیزر پرقدرت</option><option>درای نیدلینگ</option><option>فیزیوتراپی در منزل</option><!--/c:svcopts--><option>سایر / نمی‌دانم</option></select></label><label>روز مراجعه<select id="fd"></select></label><label>ساعت<select id="ft"></select></label><button class="btn" id="fsend" type="button">ارسال درخواست نوبت</button><button class="btn alt" id="fcopy" type="button">کپی متن درخواست</button><pre id="fout" class="note" hidden></pre><p class="note">ارزیابی اولیه رایگان است و کلینیک با همهٔ بیمه‌ها قرارداد دارد.</p><p class="note">درخواست شما به‌صورت پیامک برای کلینیک ارسال می‌شود و پس از تأیید کلینیک، نوبت قطعی می‌شود.</p></div><a class="btn" href="tel:09966567674">تماس: ۰۹۹۶۶۵۶۷۶۷۴</a><a class="btn alt" href="https://wa.me/989966567674" target="_blank" rel="noopener">پیام در واتس‌اپ</a><a class="btn alt" href="https://instagram.com/eltiam_phisiotherapy">اینستاگرام کلینیک</a>
 </section>
 
 <section id="reviews">
 <h2>نظر مراجعین</h2>
-<div class="quote"><p>«خیلی کادر و درمانگر خوبی دارن، مخصوصاً خانم غلام‌پور؛ کارشون عالیه.»</p><span>عباس ش.</span></div>
-</section>
+<!--c:reviews--><div class="quote"><p>«خیلی کادر و درمانگر خوبی دارن، مخصوصاً خانم غلام‌پور؛ کارشون عالیه.»</p><span>عباس ش.</span></div>
+<!--/c:reviews--></section>
 
 <section id="tips">
 <h2>نکته‌های آموزشی</h2>
-<div class="tip"><h3>۳ حرکت ساده برای کمردرد</h3><ol>
+<!--c:tips--><div class="tip"><h3>۳ حرکت ساده برای کمردرد</h3><ol>
 <li><b>زانو به سینه:</b> به پشت دراز بکشید، یک زانو را آرام به سمت سینه بکشید و ۲۰ ثانیه نگه دارید. با پای دیگر تکرار کنید.</li>
 <li><b>گربه و شتر:</b> چهاردست‌وپا، کمر را آرام بالا ببرید و بعد پایین بیاورید. ۱۰ بار، آهسته و همراه با تنفس.</li>
 <li><b>پل:</b> به پشت با زانوهای خم، باسن را بالا بیاورید و ۵ ثانیه نگه دارید. ۱۰ بار.</li></ol></div>
@@ -118,18 +119,18 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 <li>بالای مانیتور هم‌سطح چشم‌ها باشد.</li>
 <li>هر ۳۰ تا ۴۵ دقیقه چند دقیقه بلند شوید و راه بروید.</li>
 <li><b>چانه به عقب:</b> صاف بنشینید و چانه را آرام به عقب بکشید، ۵ ثانیه نگه دارید. ۱۰ بار.</li></ol></div>
-<p class="note">این حرکات جایگزین معاینه نیست. اگر درد بیشتر شد، یا بی‌حسی و سوزن‌سوزن شدن داشتید، حرکت را متوقف کنید و برای ارزیابی رایگان مراجعه کنید.</p>
+<!--/c:tips--><p class="note">این حرکات جایگزین معاینه نیست. اگر درد بیشتر شد، یا بی‌حسی و سوزن‌سوزن شدن داشتید، حرکت را متوقف کنید و برای ارزیابی رایگان مراجعه کنید.</p>
 </section>
 
 <section id="faq">
 <h2>سؤالات متداول</h2>
-<details><summary>ارزیابی اولیه هزینه دارد؟</summary><p>خیر، ارزیابی اولیه در کلینیک التیام همیشه رایگان است.</p></details>
+<!--c:faq--><details><summary>ارزیابی اولیه هزینه دارد؟</summary><p>خیر، ارزیابی اولیه در کلینیک التیام همیشه رایگان است.</p></details>
 <details><summary>با کدام بیمه‌ها قرارداد دارید؟</summary><p>با همهٔ بیمه‌ها طرف قرارداد هستیم. برای استفاده از بیمه، دستور پزشک را همراه داشته باشید.</p></details>
 <details><summary>چند جلسه فیزیوتراپی لازم دارم؟</summary><p>بستگی به نوع مشکل و شرایط شما دارد. بعد از ارزیابی اولیه، فیزیوتراپیست تعداد جلسات و برنامهٔ درمان را با شما در میان می‌گذارد.</p></details>
 <details><summary>چه چیزی همراه بیاورم؟</summary><p>دستور پزشک، مدارک تصویربرداری مثل MRI یا عکس رادیولوژی (اگر دارید) و لباس راحت.</p></details>
 <details><summary>فیزیوتراپی در منزل هم دارید؟</summary><p>بله. برای هماهنگی با شمارهٔ ۰۹۹۶۶۵۶۷۶۷۴ تماس بگیرید.</p></details>
 <details><summary>چطور نوبت بگیرم؟</summary><p>فرم «دریافت نوبت» را پر کنید یا تماس بگیرید؛ پس از تأیید کلینیک، نوبت شما قطعی می‌شود.</p></details>
-</section>
+<!--/c:faq--></section>
 
 <section id="address">
 <h2>آدرس</h2>

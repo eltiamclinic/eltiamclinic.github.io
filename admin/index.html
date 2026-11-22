@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1d3fd1">
+<title>پنل مدیریت التیام</title>
+<link rel="icon" href="../icon-192.png">
+<style>
+@font-face{font-family:'Vazirmatn';font-weight:400;src:url(../fonts/vazirmatn-400.woff2) format('woff2')}
+@font-face{font-family:'Vazirmatn';font-weight:600;src:url(../fonts/vazirmatn-600.woff2) format('woff2')}
+:root{--bg:#f5f7ff;--card:#fff;--ink:#101938;--mute:#53608a;--brand:#1d3fd1;--line:#d9e0fb;--red:#c62828}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.8}
+.w{max-width:680px;margin:0 auto;padding:16px 14px 120px}
+h1{font-size:20px;margin:8px 0 4px}
+.sub{color:var(--mute);font-size:13px;margin:0 0 14px}
+details.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}
+details.sec>summary{padding:14px 16px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+details.sec>summary::after{content:'▾';color:var(--brand)}
+details.sec[open]>summary::after{content:'▴'}
+.body{padding:0 14px 14px}
+.it{border:1px dashed var(--line);border-radius:12px;padding:10px;margin:10px 0;background:var(--bg)}
+.it .bar{display:flex;gap:6px;justify-content:flex-end;margin-bottom:4px}
+label{display:block;font-size:13px;color:var(--mute);margin:6px 0 2px}
+input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:15px}
+textarea{min-height:70px;resize:vertical}
+button{font:inherit;cursor:pointer}
+.sm{border:1px solid var(--line);background:#fff;border-radius:8px;padding:2px 10px;font-size:14px}
+.sm.del{color:var(--red)}
+.add{width:100%;border:2px dashed var(--brand);background:transparent;color:var(--brand);border-radius:12px;padding:8px;font-weight:600;margin-top:6px}
+.btn{width:100%;border:0;background:var(--brand);color:#fff;font-weight:600;border-radius:14px;padding:14px;font-size:16px}
+.btn.alt{background:transparent;color:var(--brand);border:2px solid var(--brand);margin-top:8px}
+#save{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:656px;margin:0 auto;box-shadow:0 12px 28px -8px rgba(20,46,156,.6)}
+.thumb{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:block;margin:4px 0;background:#e6eaf8}
+.thumb.p{width:110px;height:147px}
+.hint{font-size:12px;color:var(--mute);margin:4px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+#msg{position:fixed;top:12px;left:12px;right:12px;max-width:656px;margin:0 auto;padding:12px 14px;border-radius:12px;color:#fff;font-weight:600;display:none;z-index:9}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top a{font-size:13px;color:var(--brand)}
+ol.help{padding-right:18px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="w">
+<div id="msg"></div>
+
+<div id="login" hidden>
+<h1>پنل مدیریت فیزیوتراپی التیام</h1>
+<p class="sub">برای ورود، «کلید دسترسی» گیت‌هاب را وارد کنید. این کلید فقط روی همین گوشی ذخیره می‌شود.</p>
+<div class="box">
+<label>کلید دسترسی (Token)</label>
+<input id="tok" type="password" autocomplete="current-password" dir="ltr" placeholder="github_pat_...">
+<label style="display:flex;gap:8px;align-items:center;color:var(--ink)"><input id="rem" type="checkbox" checked style="width:auto"> روی این گوشی بماند</label>
+<button class="btn" id="go" style="margin-top:10px">ورود</button>
+</div>
+<details class="sec"><summary>کلید را از کجا بگیرم؟</summary><div class="body"><ol class="help">
+<li>در گیت‌هاب: Settings ← Developer settings ← Personal access tokens ← Fine-grained tokens ← Generate new token.</li>
+<li>Resource owner: <b>eltiamclinic</b>. Expiration: یک سال.</li>
+<li>Repository access: Only select repositories ← <b>eltiamclinic.github.io</b>.</li>
+<li>Permissions ← Repository ← Contents: <b>Read and write</b>.</li>
+<li>Generate token، کلید را کپی و این‌جا وارد کنید.</li>
+</ol></div></details>
+</div>
+
+<div id="app" hidden>
+<div class="top"><h1>پنل مدیریت التیام</h1><a href="#" id="out">خروج</a></div>
+<p class="sub">بعد از «ذخیره»، تغییرات حدود ۱ تا ۲ دقیقه بعد روی سایت و اپ دیده می‌شود. <a href="../" target="_blank">مشاهدهٔ سایت</a></p>
+<div id="form"></div>
+<button class="btn" id="save">ذخیره و انتشار روی سایت</button>
+</div>
+</div>
+
+<script src="render.js"></script>
+<script>
+(function(){
+var OWNER='eltiamclinic',REPO='eltiamclinic.github.io',API='https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/';
+var $=function(i){return document.getElementById(i)},T=localStorage.getItem('elt_tok')||sessionStorage.getItem('elt_tok'),C=null;
+var SCHEMA=[
+ {k:'notice',t:'📢 اطلاعیهٔ بالای صفحه',type:'text',hint:'مثلاً «روز ۲۵ آذر کلینیک تعطیل است». خالی بگذارید تا نمایش داده نشود.'},
+ {k:'hours',t:'🕒 ساعت کاری',f:[['label','روز'],['value','ساعت']]},
+ {k:'reviews',t:'💬 نظر مراجعین',f:[['text','متن نظر','ta'],['name','نام (مثل: عباس ش.)']],hint:'فقط با رضایت مراجع، و نام خانوادگی کوتاه شده.'},
+ {k:'gallery',t:'🏢 عکس‌های کلینیک (اسلایدر)',f:[['img','عکس','img'],['caption','توضیح عکس']]},
+ {k:'team',t:'👩‍⚕️ درمانگران',f:[['img','عکس','imgp'],['name','نام'],['role','عنوان/مدرک'],['text','توضیح کوتاه','ta']]},
+ {k:'services',t:'🩺 خدمات',f:[['title','نام خدمت'],['desc','توضیح کوتاه (اختیاری)']],hint:'فهرست فرم نوبت هم خودکار با همین خدمات به‌روز می‌شود.'},
+ {k:'perks',t:'✓ نشان‌های بالای صفحه',type:'list'},
+ {k:'tips',t:'🏋️ نکته‌های آموزشی',f:[['title','عنوان'],['items','حرکت‌ها؛ هر خط یک مورد','lines']],hint:'برای پررنگ شدن ابتدای خط، بعد از عنوان «:» بگذارید. مثل «پل: ...»'},
+ {k:'faq',t:'❓ سؤالات متداول',f:[['q','سؤال'],['a','جواب','ta']]}
+];
+function msg(t,ok){var m=$('msg');m.textContent=t;m.style.background=ok===false?'#c62828':ok==='w'?'#53608a':'#2e7d32';m.style.display='block';clearTimeout(m._t);if(ok!=='w')m._t=setTimeout(function(){m.style.display='none'},4000)}
+function b64e(s){return btoa(unescape(encodeURIComponent(s)))}
+function b64d(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,''))))}
+function gh(path,opt){opt=opt||{};opt.headers={'Authorization':'Bearer '+T,'Accept':'application/vnd.github+json'};return fetch(API+path+(opt.method?'':'?t='+Date.now()),opt).then(function(r){if(r.status===401||r.status===403)throw new Error('auth');if(!r.ok&&r.status!==404)throw new Error('http '+r.status);return r.status===404?null:r.json()})}
+function get(path){return gh(path).then(function(j){return j&&{text:b64d(j.content),sha:j.sha}})}
+function put(path,b64,sha,m){return gh(path,{method:'PUT',body:JSON.stringify({message:m,content:b64,sha:sha||undefined,committer:undefined})})}
+function el(tag,attrs,kids){var x=document.createElement(tag);for(var a in attrs||{}){if(a==='on')for(var ev in attrs.on)x.addEventListener(ev,attrs.on[ev]);else if(a in x&&a!=='list')x[a]=attrs[a];else x.setAttribute(a,attrs[a])}(kids||[]).forEach(function(k){if(k)x.appendChild(typeof k==='string'?document.createTextNode(k):k)});return x}
+function imgField(o,key,cls){
+ var im=el('img',{className:'thumb'+(cls?' p':''),src:o[key]?'../'+o[key]:''});
+ var inp=el('input',{type:'file',accept:'image/*',on:{change:function(){var f=inp.files[0];if(!f)return;msg('در حال آپلود عکس…','w');resize(f,cls?900:1400).then(function(d){var name='img/u-'+Date.now()+'.webp';return put(name,d.split(',')[1],null,'Upload photo').then(function(){o[key]=name;im.src=d;msg('عکس آپلود شد. برای انتشار «ذخیره» را بزنید.')})}).catch(err)}}});
+ return el('div',{},[im,inp])}
+function resize(file,max){return new Promise(function(ok,no){var u=URL.createObjectURL(file),i=new Image();i.onload=function(){var s=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*s);c.height=Math.round(i.height*s);c.getContext('2d').drawImage(i,0,0,c.width,c.height);var d=c.toDataURL('image/webp',.82);if(d.indexOf('image/webp')<0)d=c.toDataURL('image/jpeg',.85);URL.revokeObjectURL(u);ok(d)};i.onerror=no;i.src=u})}
+function field(o,f){
+ var k=f[0],lab=el('label',{},[f[1]]),type=f[2];
+ if(type==='img'||type==='imgp')return el('div',{},[lab,imgField(o,k,type==='imgp')]);
+ var inp;
+ if(type==='lines'){inp=el('textarea',{value:(o[k]||[]).join('\n'),on:{input:function(){o[k]=inp.value.split('\n').map(function(x){return x.trim()}).filter(Boolean)}}});inp.style.minHeight='120px'}
+ else if(type==='ta')inp=el('textarea',{value:o[k]||'',on:{input:function(){o[k]=inp.value}}});
+ else inp=el('input',{value:o[k]||'',on:{input:function(){o[k]=inp.value}}});
+ return el('div',{},[lab,inp])}
+function blank(sc){var o={};sc.f.forEach(function(f){o[f[0]]=f[2]==='lines'?[]:''});return o}
+function list(sc,box){
+ box.innerHTML='';var arr=C[sc.k];
+ arr.forEach(function(o,i){
+  var bar=el('div',{className:'bar'},[
+   el('button',{className:'sm',textContent:'▲',title:'بالا',on:{click:function(){if(i>0){arr.splice(i-1,0,arr.splice(i,1)[0]);list(sc,box)}}}}),
+   el('button',{className:'sm',textContent:'▼',title:'پایین',on:{click:function(){if(i<arr.length-1){arr.splice(i+1,0,arr.splice(i,1)[0]);list(sc,box)}}}}),
+   el('button',{className:'sm del',textContent:'حذف',on:{click:function(){if(confirm('حذف شود؟')){arr.splice(i,1);list(sc,box)}}}})]);
+  var it=el('div',{className:'it'},[bar]);
+  if(sc.type==='list'){var inp=el('input',{value:o,on:{input:function(){arr[i]=inp.value}}});it.appendChild(inp)}
+  else sc.f.forEach(function(f){it.appendChild(field(o,f))});
+  box.appendChild(it)});
+ box.appendChild(el('button',{className:'add',textContent:'+ افزودن',on:{click:function(){arr.push(sc.type==='list'?'':blank(sc));list(sc,box)}}}))}
+function build(){
+ var F=$('form');F.innerHTML='';
+ SCHEMA.forEach(function(sc,n){
+  if(!(sc.k in C))C[sc.k]=sc.type==='text'?'':[];
+  var body=el('div',{className:'body'},[sc.hint?el('p',{className:'hint',textContent:sc.hint}):null]);
+  if(sc.type==='text'){var ta=el('textarea',{value:C.notice||'',on:{input:function(){C.notice=ta.value}}});body.appendChild(ta)}
+  else{var box=el('div');body.appendChild(box);list(sc,box)}
+  F.appendChild(el('details',{className:'sec',open:n===0},[el('summary',{textContent:sc.t}),body]))})}
+function err(e){console.error(e);if(e.message==='auth'){msg('کلید دسترسی معتبر نیست یا اجازهٔ نوشتن ندارد.',false);logout(true)}else msg('خطا: '+e.message+'. دوباره امتحان کنید.',false)}
+function load(){msg('در حال بارگذاری…','w');return get('content.json').then(function(r){if(!r)throw new Error('content.json پیدا نشد');C=JSON.parse(r.text);$('login').hidden=true;$('app').hidden=false;build();$('msg').style.display='none'}).catch(err)}
+function logout(keep){localStorage.removeItem('elt_tok');sessionStorage.removeItem('elt_tok');T=null;$('app').hidden=true;$('login').hidden=false;if(!keep)$('tok').value=''}
+$('go').onclick=function(){T=$('tok').value.trim();if(!T)return;(($('rem').checked)?localStorage:sessionStorage).setItem('elt_tok',T);load()};
+$('out').onclick=function(e){e.preventDefault();logout()};
+var busy=false;
+$('save').onclick=function(){
+ if(busy)return;busy=true;$('save').disabled=true;msg('در حال انتشار…','w');
+ var html;
+ get('index.html').then(function(r){html=EltiamRender.apply(r.text,C);return get('content.json').then(function(cj){return put('content.json',b64e(JSON.stringify(C,null,1)),cj&&cj.sha,'Update content (admin panel)')}).then(function(){return put('index.html',b64e(html),r.sha,'Update site from admin panel')})})
+ .then(function(){msg('ذخیره شد ✓ حدود ۱ تا ۲ دقیقه بعد روی سایت دیده می‌شود.')}).catch(err).then(function(){busy=false;$('save').disabled=false})};
+if(location.hash==='#demo'){fetch('../content.json?t='+Date.now()).then(function(r){return r.json()}).then(function(j){C=j;$('login').hidden=true;$('app').hidden=false;build();$('save').onclick=function(){try{EltiamRender.apply('<!--c:notice--><!--/c:notice--><!--c:perks--><!--/c:perks--><!--c:services--><!--/c:services--><!--c:svcopts--><!--/c:svcopts--><!--c:team--><!--/c:team--><!--c:gallery--><!--/c:gallery--><!--c:dots--><!--/c:dots--><!--c:hours--><!--/c:hours--><!--c:reviews--><!--/c:reviews--><!--c:tips--><!--/c:tips--><!--c:faq--><!--/c:faq-->',C);msg('حالت نمایشی: ذخیره انجام نمی‌شود ('+C.reviews.length+' نظر، '+C.services.length+' خدمت).')}catch(e){msg('خطا: '+e.message,false)}}})}
+else if(T)load();else $('login').hidden=false;
+})();
+</script>
+</body>
+</html>
