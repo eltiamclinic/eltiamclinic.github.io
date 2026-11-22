@@ -149,7 +149,7 @@ var dn=new Intl.DateTimeFormat('en-u-ca-persian',{day:'numeric'});
 var days=[],now=new Date(),start=now.getHours()>=20?1:0;
 for(var i=start;days.length<14;i++){var d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);if(d.getDay()===4||d.getDay()===5)continue;var o=document.createElement('option');o.value=days.length;days.push(d);o.textContent=fmt.format(d);$('fd').appendChild(o)}
 function slots(){
-var d=days[+$('fd').value],even=parseInt(dn.format(d),10)%2===0,s=even?15:16,t=$('ft');t.innerHTML='';
+var d=days[+$('fd').value],wd=d.getDay(),even=(wd===6||wd===1||wd===3),s=even?15:16,t=$('ft');t.innerHTML='';
 var today=d.toDateString()===new Date().toDateString(),h=new Date().getHours();
 for(var n=s;n<=20;n++){if(today&&n<=h)continue;var o=document.createElement('option');o.textContent=n.toLocaleString('fa-IR')+':۰۰';t.appendChild(o)}
 if(!t.options.length){var o2=document.createElement('option');o2.textContent='ساعتی باقی نمانده';t.appendChild(o2)}
