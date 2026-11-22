@@ -328,5 +328,34 @@ document.addEventListener('click',function(e){var c=e.target.closest('#services 
 m.onclick=function(e){if(e.target===m)hide(true)};
 m.querySelector('[data-k=c]').onclick=function(e){e.preventDefault();hide(true)};
 m.querySelector('[data-k=b]').onclick=function(e){e.preventDefault();var s=document.getElementById('fs');if(s)[].forEach.call(s.options,function(o,i){if(o.text===cur)s.selectedIndex=i});hide(true);setTimeout(function(){var b=document.getElementById('book');if(b)b.scrollIntoView({behavior:'smooth'})},120)};
-addEventListener('popstate',function(){if(op){op=false;hide(false)}});})();</script><!--/svc--></body>
+addEventListener('popstate',function(){if(op){op=false;hide(false)}});})();</script><!--/svc--><!--tsd--><style>
+.team{cursor:pointer;position:relative}
+.team:after{content:"‹";position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.45;font-size:18px}
+#tsd{position:fixed;inset:0;z-index:9000;background:rgba(10,30,60,.5);display:none;align-items:flex-end;justify-content:center}
+#tsd.on{display:flex;animation:wf .25s}
+#tsd .sh{background:var(--card,#fff);width:min(560px,100%);max-height:88vh;overflow:auto;border-radius:24px 24px 0 0;padding:22px 20px 26px;box-shadow:0 -10px 40px rgba(0,0,0,.25);animation:su .3s cubic-bezier(.2,.8,.2,1);text-align:center}
+#tsd .gr{width:44px;height:5px;border-radius:3px;background:var(--line,#ddd);margin:-8px auto 14px}
+#tsd .ph{width:132px;height:132px;border-radius:50%;object-fit:cover;box-shadow:0 10px 24px -8px rgba(29,63,209,.5);border:4px solid #fff}
+#tsd h3{margin:12px 0 2px;color:var(--brand);font-size:21px}
+#tsd .rl{opacity:.75;font-weight:600}
+#tsd p{line-height:1.9;margin:12px 0}
+#tsd ul{text-align:right;line-height:2;margin:0 0 12px;padding:0 18px 0 0}
+#tsd video{width:min(240px,70%);aspect-ratio:9/16;border-radius:16px;margin:6px auto 14px;display:block;background:#124a5c;object-fit:cover}
+#tsd .row{display:flex;gap:10px}#tsd .row .btn{flex:1;text-align:center}
+@keyframes su{from{transform:translateY(100%)}}
+</style>
+<div id="tsd" role="dialog" aria-modal="true"><div class="sh"><div class="gr"></div><img class="ph" alt=""><h3></h3><div class="rl"></div><p></p><ul></ul><div class="vd"></div><div class="row"><a class="btn" data-k="b" href="#book">درخواست نوبت</a><a class="btn alt" href="https://wa.me/989966567674">واتساپ</a></div><a href="#" data-k="c" style="display:inline-block;margin-top:14px;opacity:.7">بستن</a></div></div>
+<script>(function(){var T={},V={"خانم امیدوار": "img/welcome.mp4"};
+var m=document.getElementById('tsd'),q=function(s){return m.querySelector(s)},op=false;
+function show(c){var n=c.querySelector('b'),r=c.querySelector('span'),t=c.querySelector('p'),i=c.querySelector('img');var nm=n?n.textContent.trim():'';
+q('.ph').src=i?i.src:'';q('.ph').alt=nm;q('h3').textContent=nm;q('.rl').textContent=r?r.textContent:'';q('p').textContent=t?t.textContent:'';
+var u=q('ul');u.innerHTML='';(T[nm]||[]).forEach(function(x){var li=document.createElement('li');li.textContent=x;u.appendChild(li)});u.style.display=u.children.length?'':'none';
+var vd=q('.vd');vd.innerHTML='';if(V[nm]){var v=document.createElement('video');v.src=V[nm];v.poster='img/welcome.webp';v.muted=true;v.playsInline=true;v.setAttribute('playsinline','');v.controls=true;v.autoplay=true;vd.appendChild(v)}
+m.classList.add('on');document.body.style.overflow='hidden';if(!op){history.pushState({tsd:1},'');op=true}}
+function hide(back){var v=m.querySelector('video');if(v)v.pause();m.classList.remove('on');document.body.style.overflow='';if(op){op=false;if(back)history.back()}}
+document.addEventListener('click',function(e){var c=e.target.closest('.team');if(c&&!e.target.closest('#tsd'))show(c)});
+m.onclick=function(e){if(e.target===m)hide(true)};
+q('[data-k=c]').onclick=function(e){e.preventDefault();hide(true)};
+q('[data-k=b]').onclick=function(e){e.preventDefault();hide(true);setTimeout(function(){var b=document.getElementById('book');if(b)b.scrollIntoView({behavior:'smooth'})},120)};
+addEventListener('popstate',function(){if(op){op=false;hide(false)}});})();</script><!--/tsd--></body>
 </html>
