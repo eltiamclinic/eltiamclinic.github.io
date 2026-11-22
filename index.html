@@ -295,9 +295,15 @@ b.onclick=function(){start();m.classList.add('on')};m.onclick=function(e){if(e.t
 <div id="wlc" role="dialog" aria-label="خوش‌آمدگویی"><div class="bx"><video src="img/welcome.mp4" poster="img/welcome.webp" muted playsinline preload="none"></video><button class="x" aria-label="بستن">×</button><button class="go">ورود به سایت</button></div></div>
 <script>(function(){try{if(localStorage.getItem('eltWlc'))return}catch(e){}
 var w=document.getElementById('wlc'),v=w.querySelector('video');
-function close(){w.classList.remove('on');v.pause();try{localStorage.setItem('eltWlc','1')}catch(e){}}
+function close(){w.classList.remove('on');v.pause();window.scrollTo(0,0);try{localStorage.setItem('eltWlc','1')}catch(e){}}
 w.querySelector('.x').onclick=close;w.querySelector('.go').onclick=close;w.onclick=function(e){if(e.target===w)close()};
-v.onended=function(){w.classList.add('end')};
+v.onended=function(){setTimeout(close,500)};
 setTimeout(function(){w.classList.add('on');v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){w.classList.add('end')})},700);
-setTimeout(function(){w.classList.add('end')},9000);})();</script><!--/welcome--></body>
+setTimeout(function(){if(w.classList.contains('on'))close()},12000);})();</script><!--/welcome--><!--home--><style>#tab a.cur:not(.hot){color:var(--brand);font-weight:800}#tab a.cur:not(.hot) b{transform:scale(1.15);display:inline-block}</style>
+<script>(function(){try{history.scrollRestoration='manual'}catch(e){}
+if(location.hash&&location.hash!=='#top'){history.replaceState(null,'',location.pathname+location.search)}
+window.scrollTo(0,0);addEventListener('load',function(){window.scrollTo(0,0)});
+var ls=[].slice.call(document.querySelectorAll('#tab a[href^="#"]'));
+function spy(){var cur=ls[0],y=scrollY+innerHeight*.35;ls.forEach(function(a){var t=document.querySelector(a.getAttribute('href'));if(t&&a.getAttribute('href')!=='#top'&&t.getBoundingClientRect().top+scrollY<=y)cur=a});ls.forEach(function(a){a.classList.toggle('cur',a===cur)})}
+addEventListener('scroll',spy,{passive:true});spy();})();</script><!--/home--></body>
 </html>
