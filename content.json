@@ -63,6 +63,10 @@
   ],
   "gallery": [
     {
+      "img": "img/logo-slide.webp",
+      "caption": "فیزیوتراپی التیام"
+    },
+    {
       "img": "img/spine.webp",
       "caption": "کلینیک تخصصی فیزیوتراپی التیام"
     },
