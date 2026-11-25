@@ -1,4 +1,4 @@
-const V='eltiam-v36',PRE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./fonts/vazirmatn-400.woff2','./fonts/vazirmatn-600.woff2','./fonts/vazirmatn-800.woff2','./img/p1.webp','./img/p2.webp','./img/logo-slide2.webp','./img/spine-3d.webp','./img/spine.webp','./img/yalda.webp'];
+const V='eltiam-v37',PRE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./fonts/vazirmatn-400.woff2','./fonts/vazirmatn-600.woff2','./fonts/vazirmatn-800.woff2','./img/p1.webp','./img/p2.webp','./img/logo-slide2.webp','./img/spine-3d.webp','./img/spine.webp','./img/yalda.webp'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(PRE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 function put(req,r){if(r&&r.ok&&r.status===200){const c=r.clone();caches.open(V).then(x=>x.put(req,c))}return r}
