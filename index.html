@@ -264,7 +264,14 @@ document.querySelector('.slider .next').onclick=function(){go(c+1);rs()};
 function rs(){clearInterval(tm);tm=setInterval(function(){go(c+1)},5000)}
 var x0=null;t.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;clearInterval(tm)},{passive:true});
 t.addEventListener('touchend',function(e){if(x0!==null){var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(c+(dx<0?1:-1))}x0=null;rs()});
-go(0);rs()})();</script><!--/fx-->
+go(0);rs()})();</script><!--/fx--><!--spn--><style>
+.slider .track img.spn{position:absolute;top:12%;height:66%!important;width:auto!important;aspect-ratio:206/570!important;object-fit:contain;z-index:2;pointer-events:none;filter:drop-shadow(0 0 14px rgba(120,170,255,.55)) drop-shadow(0 8px 10px rgba(0,0,0,.35));animation:spf 4.2s ease-in-out infinite!important;transform-origin:50% 50%}
+.slider .track img.spn.l{left:4%}
+.slider .track img.spn.r{right:4%;animation-name:spr!important;animation-delay:-2.1s!important}
+@keyframes spf{0%,100%{transform:perspective(500px) translateY(0) rotateY(-28deg) rotateZ(-2deg)}50%{transform:perspective(500px) translateY(-6%) rotateY(28deg) rotateZ(2deg)}}
+@keyframes spr{0%,100%{transform:perspective(500px) scaleX(-1) translateY(0) rotateY(-28deg) rotateZ(-2deg)}50%{transform:perspective(500px) scaleX(-1) translateY(-6%) rotateY(28deg) rotateZ(2deg)}}
+@media (prefers-reduced-motion:reduce){.slider .track img.spn{animation:none!important}}
+</style><script>(function(){var i=document.querySelector('.track img[src*="logo-slide"]');if(!i)return;var f=i.closest('figure');['l','r'].forEach(function(k){var e=document.createElement('img');e.src='img/spine-3d.webp';e.alt='';e.className='spn '+k;e.setAttribute('aria-hidden','true');f.appendChild(e)})})();</script><!--/spn-->
 <!--3dbtn--><style>
 .btn,#falb,.slider .nav,#falc button{position:relative;transition:transform .12s ease,box-shadow .12s ease,filter .12s}
 .btn:not(.alt){background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 78%,#fff) 0%,var(--brand) 55%,color-mix(in srgb,var(--brand) 80%,#000) 100%);box-shadow:0 5px 0 color-mix(in srgb,var(--brand) 60%,#000),0 12px 20px -8px var(--brand),inset 0 1px 0 rgba(255,255,255,.45);text-shadow:0 1px 1px rgba(0,0,0,.25)}
