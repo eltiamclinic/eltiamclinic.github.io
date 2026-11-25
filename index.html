@@ -42,6 +42,22 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 36px}
 .dots button.on{width:22px;border-radius:5px;background:#2a9d8f}
 .notice{background:#fbbf24;color:#101938;border-radius:14px;padding:10px 14px;font-weight:600;margin:0 auto 16px;max-width:460px;position:relative;z-index:1}
 </style>
+<!--wide--><style>
+@media (min-width:640px){.w{max-width:none;padding-left:clamp(20px,5vw,72px);padding-right:clamp(20px,5vw,72px)}.grid{grid-template-columns:repeat(3,1fr)}header p,.notice{max-width:640px}}
+@media (min-width:960px){
+.grid{grid-template-columns:repeat(4,1fr);gap:16px}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:14px}.steps li{margin:0}
+#team,#reviews,#tips,#faq{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+#team>h2,#reviews>h2,#tips>h2,#faq>h2{grid-column:1/-1;margin:0}
+#team .team{margin:0!important;height:100%}.quote,.tip,details{margin:0!important}
+.slider{max-width:900px;margin:0 auto}.dots{max-width:900px;margin-left:auto;margin-right:auto}
+.igc{flex:0 0 230px}
+#hours .box,#book .box{max-width:760px;margin:0 auto}#hours h2,#book h2{max-width:760px;margin-left:auto;margin-right:auto}
+.maps{max-width:900px;margin:0 auto}
+h1{font-size:38px}h2{font-size:24px}section{padding:40px 0}
+}
+@media (min-width:1400px){#tips{grid-template-columns:repeat(3,1fr)}}
+</style><!--/wide-->
 </head>
 <body>
 <div class="w">
