@@ -7,7 +7,7 @@ notice:function(c){return c.notice&&c.notice.trim()?'<div class="notice">📢 '+
 perks:function(c){return (c.perks||[]).filter(Boolean).map(function(p){return '<span class="perk">✓ '+e(p)+'</span>'}).join('')},
 services:function(c){return '\n'+c.services.map(function(s){return '<div class="card">'+e(s.title)+(s.desc?'<small>'+e(s.desc)+'</small>':'')+'</div>'}).join('\n')+'\n'},
 svcopts:function(c){return c.services.map(function(s){return '<option>'+e(s.title)+'</option>'}).join('')},
-team:function(c){return c.team.map(function(t,i){return '<div class="team"'+(i?' style="margin-top:12px"':'')+'><img src="'+e(t.img)+'" alt="'+e(t.name+'، '+t.role)+'" loading="lazy"><div><b>'+e(t.name)+'</b><span>'+e(t.role)+'</span>'+(t.text?'<p>'+e(t.text)+'</p>':'')+'</div></div>'}).join('\n')+'\n'},
+team:function(c){return c.team.map(function(t,i){return '<div class="team"'+(i?' style="margin-top:12px"':'')+'><img src="'+e(t.img)+'" alt="'+e(t.role?t.name+'، '+t.role:t.name)+'" loading="lazy"><div><b>'+e(t.name)+'</b>'+(t.role?'<span>'+e(t.role)+'</span>':'')+(t.text?'<p>'+e(t.text)+'</p>':'')+'</div></div>'}).join('\n')+'\n'},
 gallery:function(c){return c.gallery.map(function(g,i){return '<figure><img decoding="async"'+(i?' loading="lazy"':'')+' src="'+e(g.img)+'" alt="'+e(g.caption)+'">'+(g.caption?'<figcaption>'+e(g.caption)+'</figcaption>':'')+'</figure>'}).join('')},
 dots:function(c){return c.gallery.map(function(g,i){return '<button type="button" aria-label="عکس '+(i+1)+'"></button>'}).join('')},
 hours:function(c){return c.hours.map(function(h){return '<div class="row"><span>'+e(h.label)+'</span><span>'+e(h.value)+'</span></div>'}).join('\n')+'\n'},
