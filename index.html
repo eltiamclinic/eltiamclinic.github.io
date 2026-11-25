@@ -166,7 +166,7 @@ h1{font-size:38px}h2{font-size:24px}section{padding:40px 0}
 
 <section id="book">
 <h2>دریافت نوبت</h2>
-<div class="box"><label>نام و نام‌خانوادگی<input id="fn" autocomplete="name"></label><label>شماره موبایل<input id="fp" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxxx"></label><label>مشکل یا خدمت مورد نیاز<select id="fs"><!--c:svcopts--><option>کمردرد</option><option>گردن‌درد</option><option>توان‌بخشی بعد از جراحی</option><option>ورزش درمانی</option><option>شاک‌ویو</option><option>لیزر پرقدرت</option><option>درای نیدلینگ</option><option>بارداری و بعد از زایمان</option><option>نوبت ویژه سالمندان</option><option>فیزیوتراپی در منزل</option><!--/c:svcopts--><option>سایر / نمی‌دانم</option></select></label><label>روز مراجعه<select id="fd"></select></label><label>ساعت<select id="ft"></select></label><button class="btn" id="fsend" type="button">ارسال درخواست نوبت</button><button class="btn alt" id="fcopy" type="button">کپی متن درخواست</button><pre id="fout" class="note" hidden></pre><p class="note">ارزیابی اولیه رایگان است و کلینیک با همهٔ بیمه‌ها قرارداد دارد.</p><p class="note">درخواست شما به‌صورت پیامک برای کلینیک ارسال می‌شود و پس از تأیید کلینیک، نوبت قطعی می‌شود.</p></div><a class="btn" href="tel:09966567674">تماس: ۰۹۹۶۶۵۶۷۶۷۴</a><a class="btn alt" href="https://wa.me/989966567674" target="_blank" rel="noopener">پیام در واتس‌اپ</a><a class="btn" href="https://ble.ir/Eltiambabol1405_bot" target="_blank" rel="noopener">دریافت نوبت از طریق ربات بله</a><a class="btn alt" href="https://instagram.com/eltiam_phisiotherapy">اینستاگرام کلینیک</a>
+<div class="box"><label>نام و نام‌خانوادگی<input id="fn" autocomplete="name"></label><label>شماره موبایل<input id="fp" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxxx"></label><label>مشکل یا خدمت مورد نیاز<select id="fs"><!--c:svcopts--><option>کمردرد</option><option>گردن‌درد</option><option>توان‌بخشی بعد از جراحی</option><option>ورزش درمانی</option><option>شاک‌ویو</option><option>لیزر پرقدرت</option><option>درای نیدلینگ</option><option>بارداری و بعد از زایمان</option><option>نوبت ویژه سالمندان</option><option>فیزیوتراپی در منزل</option><!--/c:svcopts--><option>سایر / نمی‌دانم</option></select></label><label>روز مراجعه<select id="fd"></select></label><label>ساعت<select id="ft"></select></label><button class="btn" id="fsend" type="button">ارسال درخواست نوبت</button><button class="btn alt" id="fcopy" type="button">کپی متن درخواست</button><pre id="fout" class="note" hidden></pre><p class="note">ارزیابی اولیه رایگان است و کلینیک با همهٔ بیمه‌ها قرارداد دارد.</p><p class="note">درخواست شما مستقیم برای منشی کلینیک ارسال می‌شود و پس از تأیید، برای قطعی شدن نوبت با شما تماس می‌گیریم.</p></div><a class="btn" href="tel:09966567674">تماس: ۰۹۹۶۶۵۶۷۶۷۴</a><a class="btn alt" href="https://wa.me/989966567674" target="_blank" rel="noopener">پیام در واتس‌اپ</a><a class="btn" href="https://ble.ir/Eltiambabol1405_bot" target="_blank" rel="noopener">دریافت نوبت از طریق ربات بله</a><a class="btn alt" href="https://instagram.com/eltiam_phisiotherapy">اینستاگرام کلینیک</a>
 </section>
 
 <section id="reviews">
@@ -216,7 +216,7 @@ for(var i=start;days.length<14;i++){var d=new Date(now.getFullYear(),now.getMont
 function slots(){
 var d=days[+$('fd').value],wd=d.getDay(),even=(wd===6||wd===1||wd===3),s=even?15:16,t=$('ft');t.innerHTML='';
 var today=d.toDateString()===new Date().toDateString(),h=new Date().getHours();
-for(var n=s;n<=20;n++){if(today&&n<=h)continue;var o=document.createElement('option');o.textContent=n.toLocaleString('fa-IR')+':۰۰';t.appendChild(o)}
+for(var n=s;n<=20;n++){if(today&&n<=h)continue;var o=document.createElement('option');o.dataset.h=n;o.textContent=n.toLocaleString('fa-IR')+':۰۰';t.appendChild(o)}
 if(!t.options.length){var o2=document.createElement('option');o2.textContent='ساعتی باقی نمانده';t.appendChild(o2)}
 }
 $('fd').addEventListener('change',slots);slots();
@@ -227,9 +227,16 @@ if(!/^09\d{9}$/.test(ph)){alert('شماره موبایل را درست وارد 
 return 'سلام، درخواست نوبت فیزیوتراپی التیام\nنام: '+$('fn').value.trim()+'\nموبایل: '+ph+'\nمشکل: '+$('fs').value+'\nروز: '+$('fd').selectedOptions[0].textContent+'\nساعت: '+$('ft').value
 }
 $('fsend').addEventListener('click',function(){
-var m=msg();if(!m)return;
-$('fout').hidden=false;$('fout').textContent=m;
-var a=document.createElement('a');a.href='sms:'+PH+'?&body='+encodeURIComponent(m);document.body.appendChild(a);a.click();a.remove()
+var m=msg();if(!m)return;var btn=$('fsend'),op=$('ft').selectedOptions[0];
+function sms(){$('fout').hidden=false;$('fout').textContent=m;var a=document.createElement('a');a.href='sms:'+PH+'?&body='+encodeURIComponent(m);document.body.appendChild(a);a.click();a.remove()}
+if(!op||!op.dataset.h){sms();return}
+var d=days[+$('fd').value],iso=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+var ph=$('fp').value.replace(/[۰-۹]/g,function(c){return P.indexOf(c)}).replace(/\s|-/g,'');
+btn.disabled=true;btn.textContent='در حال ارسال…';
+var ctl=new AbortController();setTimeout(function(){ctl.abort()},8000);
+fetch('https://eltiam-bot.eltiam.workers.dev/web-book',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:$('fn').value.trim(),phone:ph,service:$('fs').value,date:iso,hour:+op.dataset.h}),signal:ctl.signal}).then(function(r){return r.json()}).then(function(j){
+if(!j.ok)throw 0;$('fout').hidden=false;$('fout').textContent='✅ درخواست شما ثبت و برای منشی کلینیک ارسال شد.\nبرای قطعی شدن نوبت با شما تماس می‌گیریم.\n\n'+m;btn.textContent='درخواست ثبت شد ✓'
+}).catch(function(){btn.disabled=false;btn.textContent='ارسال درخواست نوبت';sms()})
 });
 $('fcopy').addEventListener('click',function(){
 var m=msg();if(!m)return;
